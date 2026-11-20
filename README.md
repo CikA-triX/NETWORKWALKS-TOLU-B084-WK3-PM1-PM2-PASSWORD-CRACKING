@@ -12,7 +12,7 @@
 
 ---
 
-## 📌 Project Overview
+##  Project Overview
 
 Week 3 of the Networkwalks Cybersecurity Internship has two required modules, both about recovering the password of an encrypted PDF file:
 
@@ -21,7 +21,7 @@ Week 3 of the Networkwalks Cybersecurity Internship has two required modules, bo
 
 I was given three encrypted PDFs: `My Locked PDF1.pdf`, `My Locked PDF2.pdf`, and `My Locked PDF3.pdf`. I cracked all three with JTR/Johnny, and two of the three with the Networkwalks tools. The gap between those two results turned out to be the most useful lesson of the week.
 
-## 🎯 Task Requirements
+## Task Requirements
 
 - [x] Extract a crackable hash from each encrypted PDF
 - [x] Install and configure John the Ripper and Johnny
@@ -29,11 +29,11 @@ I was given three encrypted PDFs: `My Locked PDF1.pdf`, `My Locked PDF2.pdf`, an
 - [x] Crack PDF 2 and PDF 3 with the Networkwalks Hash Calculator and Password Cracker
 - [x] Confirm each password by opening the actual PDF with it
 
-## 🧱 Setup
+## Setup
 
 | Component | Detail |
 |---|---|
-| OS | Windows 10/11 |
+| OS | Windows 11 |
 | Cracking tool | John the Ripper 1.9.0-jumbo-1 (64-bit, Cygwin, AVX2) |
 | GUI | Johnny 2.2 |
 | Hash extractor (PM1) | onlinehashcrack.com PDF hash extractor |
@@ -49,7 +49,7 @@ I installed Johnny and pointed it at John's executable, inside the `run` folder 
 ![Johnny settings](images/02_johnny_settings_john_path.png)
 *Figure 2: Johnny's Settings tab, pointed at `john.exe` inside the JTR install folder. Johnny detected it as "John the Ripper 1.9.0-jumbo-1 OMP".*
 
-## 🛠️ W3-PM1: Password Cracking with JTR
+## W3-PM1: Password Cracking with JTR
 
 The idea is simple: a password-protected PDF doesn't store the password itself, it stores a hash derived from it. Pull out that hash with an extractor tool, hand it to John the Ripper, and let it try passwords until one produces a matching hash.
 
@@ -102,7 +102,7 @@ Same process: extract the hash, feed it to Johnny.
 | My Locked PDF2.pdf | `$pdf$4*4*128*-1028*1*16*0853f2cd...` | `password1` | `nw{networkwalks_persistence_jtr_270521}` |
 | My Locked PDF3.pdf | `$pdf$4*4*128*-1028*1*16*34eb542e...` | `1qaz2wsx` | `nw{networkwalks_flag_260821_1}` |
 
-## 🛠️ W3-PM2: Password Cracking with Networkwalks Tools
+## W3-PM2: Password Cracking with Networkwalks Tools
 
 The second module uses two free Networkwalks web tools instead of JTR: the **Hash Calculator** extracts the same kind of `$pdf$...` hash directly in the browser, and the **Password Cracker** runs a dictionary attack against it using a built-in 100-word list.
 
@@ -142,12 +142,13 @@ I tried the same steps against PDF 1, but the Networkwalks Password Cracker's bu
 | My Locked PDF2.pdf | Networkwalks Password Cracker | ✅ `password1` |
 | My Locked PDF3.pdf | Networkwalks Password Cracker | ✅ `1qaz2wsx` |
 
-## 💡 What I Learned
+##  What I Learned
 
 - **A protected file's password is never stored directly** — only a hash derived from it, which is why extracting that hash is always the first step before any cracking tool can run.
 - **Wordlist size and quality decide what gets cracked.** The same two passwords fell instantly to both tools, but the third needed John's larger jumbo wordlist. A cracking tool is only as good as the list behind it.
 - **"Uncommon" doesn't mean "strong."** `good-luck` beat a 100-word list but is still a dictionary word pattern — it fell to JTR in seconds. None of these three passwords would survive a real attacker with a proper wordlist.
 - **GUI tools like Johnny make JTR approachable**, but Johnny is only a front end — it still needs John's actual executable to do the work, which is why pointing it at the right path matters.
+- **For a SOC analyst, this is the same judgment call behind a weak-credential alert.** A password surviving one quick automated check doesn't mean it's strong — it just means that particular check wasn't thorough enough. That's why real password policies get enforced with layered testing against multiple wordlists, not a single pass/fail tool.
 
 ## ➡️ Conclusion
 
@@ -156,4 +157,3 @@ All three PDFs were unlocked. John the Ripper, through Johnny, cracked every pas
 > ⚠️ This lab used files provided for the internship, for learning purposes only.
 
 ---
-*Networkwalks Cybersecurity Internship, Batch B084, Week 3 Project*
