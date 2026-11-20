@@ -144,11 +144,11 @@ I tried the same steps against PDF 1, but the Networkwalks Password Cracker's bu
 
 ##  What I Learned
 
-- **A protected file's password is never stored directly** — only a hash derived from it, which is why extracting that hash is always the first step before any cracking tool can run.
+- **A protected file's password is never stored directly**, only a hash derived from it, which is why extracting that hash is always the first step before any cracking tool can run.
 - **Wordlist size and quality decide what gets cracked.** The same two passwords fell instantly to both tools, but the third needed John's larger jumbo wordlist. A cracking tool is only as good as the list behind it.
-- **"Uncommon" doesn't mean "strong."** `good-luck` beat a 100-word list but is still a dictionary word pattern — it fell to JTR in seconds. None of these three passwords would survive a real attacker with a proper wordlist.
-- **GUI tools like Johnny make JTR approachable**, but Johnny is only a front end — it still needs John's actual executable to do the work, which is why pointing it at the right path matters.
-- **For a SOC analyst, this is the same judgment call behind a weak-credential alert.** A password surviving one quick automated check doesn't mean it's strong — it just means that particular check wasn't thorough enough. That's why real password policies get enforced with layered testing against multiple wordlists, not a single pass/fail tool.
+- **"Uncommon" doesn't mean "strong."** `good-luck` beat a 100-word list but is still a dictionary word pattern, it fell to JTR in seconds. None of these three passwords would survive a real attacker with a proper wordlist.
+- **GUI tools like Johnny make JTR approachable**, but Johnny is only a front end, it still needs John's actual executable to do the work, which is why pointing it at the right path matters.
+- **For a SOC analyst, this is the same judgment call behind a weak-credential alert.** A password surviving one quick automated check doesn't mean it's strong, it just means that particular check wasn't thorough enough. That's why real password policies get enforced with layered testing against multiple wordlists, not a single pass/fail tool.
 
 ## ➡️ Conclusion
 
