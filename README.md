@@ -152,7 +152,7 @@ I tried the same steps against PDF 1, but the Networkwalks Password Cracker's bu
 
 ## ➡️ Conclusion
 
-All three PDFs were unlocked. John the Ripper, through Johnny, cracked every password; the Networkwalks tools cracked two of the three, missing only the one outside their smaller built-in list. The exercise made the gap between a convenience tool and a dedicated cracker concrete, and it's a clear argument for long, unpredictable passwords over short dictionary words — common or not.
+All three PDFs were unlocked. John the Ripper, through Johnny, cracked every password; the Networkwalks tools cracked two of the three, missing only the one outside their smaller built-in list. The exercise made the gap between a convenience tool and a dedicated cracker concrete, and it's a clear argument for long, unpredictable passwords over short dictionary words, common or not.
 
 > ⚠️ This lab used files provided for the internship, for learning purposes only.
 
