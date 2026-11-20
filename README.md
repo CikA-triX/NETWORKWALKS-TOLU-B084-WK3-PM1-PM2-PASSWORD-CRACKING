@@ -43,10 +43,10 @@ I was given three encrypted PDFs: `My Locked PDF1.pdf`, `My Locked PDF2.pdf`, an
 
 I installed Johnny and pointed it at John's executable, inside the `run` folder of the JTR download, since Johnny only drives the attack and needs John itself to do the cracking.
 
-![Johnny installer](images/01_johnny_installer.png)
+![Johnny installer](images/johnny-installer.png)
 *Figure 1: Finishing the Johnny setup wizard.*
 
-![Johnny settings](images/02_johnny_settings_john_path.png)
+![Johnny settings](images/johnny-settings-john-path.png)
 *Figure 2: Johnny's Settings tab, pointed at `john.exe` inside the JTR install folder. Johnny detected it as "John the Ripper 1.9.0-jumbo-1 OMP".*
 
 ## W3-PM1: Password Cracking with JTR
@@ -57,41 +57,41 @@ The idea is simple: a password-protected PDF doesn't store the password itself, 
 
 I uploaded `My Locked PDF1.pdf` to the online hash extractor and got back a hash starting `$pdf$4*4*128*-1028*1*16*ca7f72f1...`.
 
-![PDF1 hash](images/03_pdf1_hash_extracted.png)
+![PDF1 hash](images/jtr-pdf1-hash.png)
 *Figure 3: Extracted hash for PDF 1.*
 
 I saved the hash into a text file, opened it in Johnny, and started the attack. It cracked almost immediately.
 
-![PDF1 cracked](images/04_pdf1_johnny_cracked.png)
+![PDF1 cracked](images/jtr-pdf1-cracked.png)
 *Figure 4: Johnny recovers the password `good-luck` for PDF 1.*
 
 Entering `good-luck` opened the file and revealed the flag:
 
-![PDF1 flag](images/05_pdf1_unlocked_flag.png)
+![PDF1 flag](images/pdf1-unlocked-flag.png)
 *Figure 5: PDF 1 unlocked, flag `nw{cybersecurity_flag_captured_2608}`.*
 
 ### PDF 2
 
 Same process: extract the hash, feed it to Johnny.
 
-![PDF2 hash](images/06_pdf2_hash_extracted.png)
+![PDF2 hash](images/jtr-pdf2-hash.png)
 *Figure 6: Extracted hash for PDF 2.*
 
-![PDF2 cracked](images/07_pdf2_johnny_cracked.png)
+![PDF2 cracked](images/jtr-pdf2-cracked.png)
 *Figure 7: Johnny recovers the password `password1` for PDF 2.*
 
-![PDF2 flag](images/08_pdf2_unlocked_flag.png)
+![PDF2 flag](images/pdf2-unlocked-flag.png)
 *Figure 8: PDF 2 unlocked, flag `nw{networkwalks_persistence_jtr_270521}`.*
 
 ### PDF 3
 
-![PDF3 hash](images/09_pdf3_hash_extracted.png)
+![PDF3 hash](images/jtr-pdf3-hash.png)
 *Figure 9: Extracted hash for PDF 3.*
 
-![PDF3 cracked](images/10_pdf3_johnny_cracked.png)
+![PDF3 cracked](images/jtr-pdf3-cracked.png)
 *Figure 10: Johnny recovers the password `1qaz2wsx` for PDF 3.*
 
-![PDF3 flag](images/11_pdf3_unlocked_flag.png)
+![PDF3 flag](images/pdf3-unlocked-flag.png)
 *Figure 11: PDF 3 unlocked, flag `nw{networkwalks_flag_260821_1}`.*
 
 ### PM1 Summary
@@ -110,22 +110,22 @@ I ran this against PDF 2 and PDF 3.
 
 ### PDF 2
 
-![PDF2 NW hash](images/12_pdf2_nwtools_hash.png)
+![PDF2 NW hash](images/nwtools-pdf2-hash.png)
 *Figure 12: Networkwalks Hash Calculator extracting the hash for PDF 2.*
 
 I pasted that hash into the Password Cracker and ran it.
 
-![PDF2 NW cracked](images/13_pdf2_nwtools_cracked.png)
+![PDF2 NW cracked](images/nwtools-pdf2-cracked.png)
 *Figure 13: Networkwalks Password Cracker finds `password1` for PDF 2.*
 
 This matches the password Johnny found in PM1, and opened the same flag shown in Figure 8.
 
 ### PDF 3
 
-![PDF3 NW hash](images/14_pdf3_nwtools_hash.png)
+![PDF3 NW hash](images/nwtools-pdf3-hash.png)
 *Figure 14: Networkwalks Hash Calculator extracting the hash for PDF 3.*
 
-![PDF3 NW cracked](images/15_pdf3_nwtools_cracked.png)
+![PDF3 NW cracked](images/nwtools-pdf3-cracked.png)
 *Figure 15: Networkwalks Password Cracker finds `1qaz2wsx` for PDF 3.*
 
 Again, this matches Johnny's result from PM1, and opened the same flag shown in Figure 11.
@@ -144,11 +144,11 @@ I tried the same steps against PDF 1, but the Networkwalks Password Cracker's bu
 
 ##  What I Learned
 
-- **A protected file's password is never stored directly** only a hash derived from it, which is why extracting that hash is always the first step before any cracking tool can run.
+- **A protected file's password is never stored directly** — only a hash derived from it, which is why extracting that hash is always the first step before any cracking tool can run.
 - **Wordlist size and quality decide what gets cracked.** The same two passwords fell instantly to both tools, but the third needed John's larger jumbo wordlist. A cracking tool is only as good as the list behind it.
-- **"Uncommon" doesn't mean "strong."** `good-luck` beat a 100-word list but is still a dictionary word pattern, it fell to JTR in seconds. None of these three passwords would survive a real attacker with a proper wordlist.
-- **GUI tools like Johnny make JTR approachable**, but Johnny is only a front end, it still needs John's actual executable to do the work, which is why pointing it at the right path matters.
-- **For a SOC analyst, this is the same judgment call behind a weak-credential alert.** A password surviving one quick automated check doesn't mean it's strong, it just means that particular check wasn't thorough enough. That's why real password policies get enforced with layered testing against multiple wordlists, not a single pass/fail tool.
+- **"Uncommon" doesn't mean "strong."** `good-luck` beat a 100-word list but is still a dictionary word pattern — it fell to JTR in seconds. None of these three passwords would survive a real attacker with a proper wordlist.
+- **GUI tools like Johnny make JTR approachable**, but Johnny is only a front end — it still needs John's actual executable to do the work, which is why pointing it at the right path matters.
+- **For a SOC analyst, this is the same judgment call behind a weak-credential alert.** A password surviving one quick automated check doesn't mean it's strong — it just means that particular check wasn't thorough enough. That's why real password policies get enforced with layered testing against multiple wordlists, not a single pass/fail tool.
 
 ## ➡️ Conclusion
 
