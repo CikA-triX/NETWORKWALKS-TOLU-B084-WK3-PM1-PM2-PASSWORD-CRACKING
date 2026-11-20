@@ -132,7 +132,7 @@ Again, this matches Johnny's result from PM1, and opened the same flag shown in 
 
 ### PDF 1: not cracked with this tool
 
-I tried the same steps against PDF 1, but the Networkwalks Password Cracker's built-in 100-word list never found `good-luck`. That's the key difference between the two modules: John the Ripper (with the jumbo wordlist it ships with) covers a much larger set of real-world passwords, while the Networkwalks tool's convenience list is intentionally small. `password1` and `1qaz2wsx` are both extremely common passwords that show up in almost any top-100 list; `good-luck` is a less typical pattern that a small built-in list simply doesn't include.
+I tried the same steps against PDF 1, but the Networkwalks Password Cracker's built-in 100-word list never found `good-luck`. That's the key difference between the two modules: John the Ripper (with the jumbo wordlist it ships with) covers a much larger set of real-world passwords, while the Networkwalks tool's convenience list is intentionally small. `password1` and `1qaz2wsx` are both extremely common passwords; `good-luck` is a less typical pattern that a small built-in list simply doesn't include.
 
 ### PM2 Summary
 
